@@ -12,7 +12,6 @@ module.exports = (db) => {
         const adminData = data.rows[0];
         const theProducts = data.rows.slice(1);
         const templateVars = { products: theProducts, currentUser: currentUser, admin: adminData };
-        console.log("currentuser: ", templateVars.currentUser)
         if (!templateVars.currentUser) {
           res.json({result:"Unauthorized Access"})
           }
@@ -44,7 +43,6 @@ module.exports = (db) => {
       const queryString = `UPDATE products SET sold = true WHERE products.id = $1;`
       db.query(queryString, [req.body.product_id])
       .then(data => {
-        console.log("data.rows", data.rows)
         res.redirect("/admin");
       })
       .catch(err => {

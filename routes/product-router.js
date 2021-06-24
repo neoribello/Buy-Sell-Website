@@ -6,10 +6,8 @@ module.exports = (db) => {
   // Product page
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    console.log("id: ", id);
     db.query(`SELECT * FROM users where users.is_admin = true; SELECT * FROM products WHERE id = ${id};`)
     .then(data => {
-      console.log("data.rows: ", data.rows)
       const currentUser = req.session.user_id;
       const adminData = data.rows[0];
       const theProducts = data.rows[1];
